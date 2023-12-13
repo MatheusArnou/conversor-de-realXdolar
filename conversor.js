@@ -1,36 +1,33 @@
-let valorDolar = 4.97;
-let valorReal = gerarValorEmReal();
-let taxa = 0;
-let valorFinal = 0;
+const valorDolar = 4.97;
 
 function gerarValorEmReal() {
-    let valorEscolhido = parseFloat((Math.random() * 1000 + 1).toFixed(2));
-    return valorEscolhido;
+    return parseFloat((Math.random() * 1000 + 1).toFixed(2));
 }
 
 function conversao(valor) {
-    resultado = valor / valorDolar;
-    return resultado;
+    return valor / valorDolar;
 }
 
-
-let valorConvertidio = conversao(valorReal);
-
-function taxacao() {
-    if (valorConvertidio >= 100) {
-        taxa = valorConvertidio * 0.05;
-        valorFinal = valorConvertidio - taxa;
-    } else if (valorConvertidio > 500 && valorConvertidio <= 1000) {
-        taxa = valorConvertidio * 0.07;
-        valorFinal = valorConvertidio - taxa;
+function taxacao(valorConvertido) {
+    let taxa;
+    if (valorConvertido >= 100) {
+        taxa = valorConvertido * 0.05;
+    } else if (valorConvertido > 500 && valorConvertido <= 1000) {
+        taxa = valorConvertido * 0.07;
+    } else if (valorConvertido > 1000) {
+        taxa = valorConvertido * 0.10;
     } else {
-        valorFinal = valorConvertidio;
+        taxa = 0;
     }
-    return valorFinal;
+    const valorFinal = valorConvertido - taxa;
+    return { valorFinal, taxa };
 }
 
-console.log(`Você quer converter R$ ${valorReal}, para o dólar americano \n`);
-console.log(`A cotação do dólar hoje é de US$ ${valorDolar}\n`);
-console.log(`O valor convertido fica em US$ ${valorConvertidio.toFixed(2)}`);
-console.log(`Com uma taxa de ${taxa.toFixed(2)}`);
-console.log(`Valor final em US$ ${valorFinal.toFixed(2)}`);
+let valorReal = gerarValorEmReal();
+let valorConvertido = conversao(valorReal);
+let { valorFinal, taxa } = taxacao(valorConvertido);
+
+console.log(`Valor em Reais: ${valorReal}`);
+console.log(`Valor Convertido: ${valorConvertido}`);
+console.log(`Valor da taxa: ${taxa}`);
+console.log(`Valor final após Taxação: ${valorFinal}`);
