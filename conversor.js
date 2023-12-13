@@ -13,11 +13,10 @@ function conversao(valor) {
     return resultado;
 }
 
-// Mova a chamada de conversao() para depois de atribuir valorReal
+
 let valorConvertidio = conversao(valorReal);
 
 function taxacao() {
-    // Adicionar uma condicional que valide um valor de taxa para valores acima de 100
     if (valorConvertidio >= 100) {
         taxa = valorConvertidio * 0.05;
         valorFinal = valorConvertidio - taxa;
